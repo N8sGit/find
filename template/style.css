@@ -23,6 +23,7 @@ html, body, #editor {
     font-size: 14px;
     font-family: 'Monaco', courier, monospace;
     padding: 20px;
+    width: 100%;
   }
   
   code {
@@ -32,9 +33,14 @@ html, body, #editor {
   #box {
     background-color: black; 
     color: white;
+    width: 40%;
   }
 
   ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: white;
     opacity: 1; /* Firefox */
+  }
+
+  button {
+    padding-left: 30px;
   }
