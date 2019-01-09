@@ -13,49 +13,62 @@
     
     <div id="editor">
         <input id='box' :value="query" placeholder="Search for a word." @input='setQuery'>
-        <button v-on:click="find"> Click me!</button>
-        <p>The value of query is {{ this.query }}</p>
+        <button v-on:click="find(input, query)"> Click me!</button>
+        <p>The word you searched for appears {{ this.count }} times!</p>
         <textarea :value="input" @input="update"></textarea>
-        <!-- <div v-html="compiledMarkdown"></div> -->
     </div>
   <script>
     new Vue({
   el: '#editor',
   data: {
-    input: '',
-    query: '',
+    input: 'Hi Hi Hi',
+    query: 'Hi',
+    count: 0,
   },
   methods: {
     update: _.debounce(function (e) {
       this.input = e.target.value
-      console.log(this.input)
+      console.log(this.input, 'input')
     }, 300),
     setQuery: _.debounce(function(e){
       this.query = e.target.value
       console.log(this.query,'query value')
     }, 300),
-    find: function(){
+    find: function(source, target){
+      source = source.split(' ')
+      console.log(source, 'soruce ')
+      console.log('entered ')
+      console.log(this.count, 'this.count')
+      let count = 0; 
+      function matchEl (inc, source, target){
+      let item = source[inc]
+      //track the position of the character in target
+      let trgIndex = 0
+      let char = target[inc]
+      //iterate through source
+      let srcIndx = 0;
+      if(item[0] !== target[0]){
+        return 
+        //return if the first letter is not the same 
+      }
+      if(item.length > target.length || item.length < target.length){
+        return 
+        //return if one string is less than the other 
+      }
+      if(item === target){
+       count++
+      }
     }
+    //for now just count the number of times a word appears in a text
+    
+    for(var inc = 0; inc<source.length; inc++){
+      matchEl(inc, source, target)
+    }
+    this.count = count 
   }
+}
 
 })
   </script>
 </body>
 </html>
-
-<!-- let example1 = 'abc'
-let example2 = 'abcdefg'
-function find(source, target){
-  let middle;
-  if(!source.length % 2 === 0){
-    middle = source[Math.floor(source.length/2)]
-  } else { 
-    middle = source[Math.floor((arr.length-1)/2 )]
-  }
-  if(middle === target) {
-    return middle
-  }
-  
-}
-console.log(find(example1), 'p')
-find(example2) -->
